@@ -112,8 +112,12 @@ def main():
             st.write(top_10_words)
         st.write(visualize_documents(pos_wot_metadata,pos_wot_metadata['data']['review'].values, reduced_embeddings=pos_wot_metadata['reduced_embeddings'], custom_labels=True, hide_annotations=True,width=1250))
         st.write(visualize_hierarchy(pos_wot_metadata,orientation='left',custom_labels=True,top_n_topics=top_topics_pos,width=1250))
+    
+    
     with tab_compare:
-        st.write("Hello")
+        temp1 = "Apoel"
+        temp2 = "Omonoia"
+        st.markdown(f"### Top 10 Recommendations between **{temp1}** and **{temp2}**")
         comp_top_topics = st.slider('Select the number of most frequent topics...  ', 1, 50, 10)
         comp_col1,comp_col2 = st.columns(2)
         with comp_col1:

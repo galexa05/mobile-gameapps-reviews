@@ -18,6 +18,7 @@ openai = "==0.28"
 streamlit = "*"
 python-dotenv = "*"
 watchdog = "*"
+dill = "*"
 
 [dev-packages]
 
