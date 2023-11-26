@@ -3,6 +3,8 @@ import pickle
 import os
 import os.path
 from functions.plots import visualize_topics_over_time,visualize_documents,visualize_hierarchy,visualize_topics
+st.set_page_config(layout="wide")
+
 
 @st.cache_resource()
 def load_negative_model_data():
