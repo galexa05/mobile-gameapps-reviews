@@ -42,8 +42,8 @@ def get_top_10_themes(topic_data):
 
 def main():
     # Set the title and header of the app
-    st.title("Topic Modeling")
-    st.header("Visualization of Topics")
+    st.title("Gaming Insights Dashboard: Unveiling Wargaming and Competitor Reviews")
+    st.header("Main Company Focus: Wargaming Overview & Comparative Analysis of Competitor Reviews")
     # Get the absolute path of the current directory
 
     # Write the current directory path to the app interface
@@ -244,7 +244,7 @@ def main():
         app_data1 = selected_data[game_option1]
         app_data2 = selected_data[game_option2]  
 
-        st.markdown(f"<center><h4>Top 10 Topic themes between <b>{game_option1}</b> and <b>{game_option2}</b></h4></center>",unsafe_allow_html=True)
+        st.markdown(f"<center><h4>Top 10 {feedback_option} Topic themes between <b>{game_option1}</b> and <b>{game_option2}</b></h4></center>",unsafe_allow_html=True)
         comp_col1,comp_col2 = st.columns(2)
         with comp_col1:
             st.markdown(f"#### {game_option1}")
@@ -253,7 +253,7 @@ def main():
             st.markdown(f"#### {game_option2}")
             st.dataframe(get_top_10_themes(app_data2),use_container_width=True)
         
-        st.markdown(f"<center><h4>Top 10 Topic themes over time between <b>{game_option1}</b> and <b>{game_option2}</b></h4></center>",unsafe_allow_html=True)
+        st.markdown(f"<center><h4>Top 10 {feedback_option} Topic themes over time between <b>{game_option1}</b> and <b>{game_option2}</b></h4></center>",unsafe_allow_html=True)
         time_col1,time_col2 = st.columns(2)
         with time_col1:
             st.markdown(f"#### {game_option1}")
@@ -262,26 +262,26 @@ def main():
             st.markdown(f"#### {game_option2}")
             st.write(visualize_topics_over_time(app_data2,app_data2['topics_over_time'], top_n_topics=10,custom_labels=True, width = 800))
 
-        st.markdown(f"<h4>Visualize topics</h4>",unsafe_allow_html=True)
+        st.markdown(f"<h4>Visualize {feedback_option} topics</h4>",unsafe_allow_html=True)
         vis_topics_col1,vis_topics_col2 = st.columns(2)
         with vis_topics_col1:
-            st.write(visualize_topics(app_data1,custom_labels=True))
+            st.write(visualize_topics(app_data1,custom_labels=True,title=f"Interactive 2D Map of {feedback_option} topics ({game_option1})"))
         with vis_topics_col2:
-            st.write(visualize_topics(app_data2,custom_labels=True))
+            st.write(visualize_topics(app_data2,custom_labels=True,title=f"Interactive 2D Map of {feedback_option} topics ({game_option2}"))
 
-        st.markdown(f"<h4>Visualize the hierarchy between topics</h4>",unsafe_allow_html=True)
+        st.markdown(f"<h4>Visualize the hierarchy between {feedback_option} topics</h4>",unsafe_allow_html=True)
         hierarchy_topics_col1,hierarchy_topics_col2 = st.columns(2)
         with hierarchy_topics_col1:
-            st.write(visualize_hierarchy(app_data1,orientation='left',custom_labels=True,top_n_topics=30,width=700))
+            st.write(visualize_hierarchy(app_data1,orientation='left',custom_labels=True,top_n_topics=30,width=700,title=f"Hierarchical Clustering of Topics ({game_option1})"))
         with hierarchy_topics_col2:
-            st.write(visualize_hierarchy(app_data2,orientation='left',custom_labels=True,top_n_topics=30,width=700))
+            st.write(visualize_hierarchy(app_data2,orientation='left',custom_labels=True,top_n_topics=30,width=700,title=f"Hierarchical Clustering of Topics ({game_option2})"))
 
-        st.markdown(f"<h4>Visualize grouped reviews per topic theme</h4>",unsafe_allow_html=True)
+        st.markdown(f"<h4>Visualize grouped {feedback_option} reviews per topic theme in 2D Map</h4>",unsafe_allow_html=True)
         review_topics_col1,review_topics_col2 = st.columns(2)
         with review_topics_col1:
-            st.write(visualize_documents(app_data1,app_data1['data']['review'].values, reduced_embeddings=app_data1['reduced_embeddings'], custom_labels=True, hide_annotations=True,width=700))        
+            st.write(visualize_documents(app_data1,app_data1['data']['review'].values, reduced_embeddings=app_data1['reduced_embeddings'], custom_labels=True, hide_annotations=True,width=700, title=f"Interactive 2D Map of {feedback_option} reviews ({game_option1})"))        
         with review_topics_col2:
-            st.write(visualize_documents(app_data2,app_data2['data']['review'].values, reduced_embeddings=app_data2['reduced_embeddings'], custom_labels=True, hide_annotations=True,width=700))
+            st.write(visualize_documents(app_data2,app_data2['data']['review'].values, reduced_embeddings=app_data2['reduced_embeddings'], custom_labels=True, hide_annotations=True,width=700, title=f"Interactive 2D Map of {feedback_option} reviews ({game_option2})"))
 
 
     
