@@ -243,6 +243,8 @@ def main():
             )
         app_data1 = selected_data[game_option1]
         app_data2 = selected_data[game_option2]  
+        app_data1_maxtopics = max(app_data1['topics_over_time']['Topic'].unique())
+        app_data2_maxtopics = max(app_data2['topics_over_time']['Topic'].unique())
 
         st.markdown(f"<center><h4>Top 10 {feedback_option} Topic themes between <b>{game_option1}</b> and <b>{game_option2}</b></h4></center>",unsafe_allow_html=True)
         comp_col1,comp_col2 = st.columns(2)
@@ -262,21 +264,23 @@ def main():
             st.markdown(f"#### {game_option2}")
             st.write(visualize_topics_over_time(app_data2,app_data2['topics_over_time'], top_n_topics=10,custom_labels=True, width = 800))
 
-        st.markdown(f"<h4>Visualize {feedback_option} topics</h4>",unsafe_allow_html=True)
+        st.markdown(f"<center><h4>Visualize {feedback_option} topics</h4></center>",unsafe_allow_html=True)
         vis_topics_col1,vis_topics_col2 = st.columns(2)
         with vis_topics_col1:
             st.write(visualize_topics(app_data1,custom_labels=True,title=f"Interactive 2D Map of {feedback_option} topics ({game_option1})"))
         with vis_topics_col2:
             st.write(visualize_topics(app_data2,custom_labels=True,title=f"Interactive 2D Map of {feedback_option} topics ({game_option2}"))
 
-        st.markdown(f"<h4>Visualize the hierarchy between {feedback_option} topics</h4>",unsafe_allow_html=True)
+        st.markdown(f"<center><h4>Visualize the hierarchy between {feedback_option} topics</h4></center>",unsafe_allow_html=True)
         hierarchy_topics_col1,hierarchy_topics_col2 = st.columns(2)
         with hierarchy_topics_col1:
-            st.write(visualize_hierarchy(app_data1,orientation='left',custom_labels=True,top_n_topics=30,width=700,title=f"Hierarchical Clustering of Topics ({game_option1})"))
+            hier_most_topics1 = st.slider(f'Select the N most {feedback_option} frequent topics...    ', 1, app_data1_maxtopics, 30)
+            st.write(visualize_hierarchy(app_data1,orientation='left',custom_labels=True,top_n_topics=hier_most_topics1,width=700,title=f"Hierarchical Clustering of Topics ({game_option1})"))
         with hierarchy_topics_col2:
-            st.write(visualize_hierarchy(app_data2,orientation='left',custom_labels=True,top_n_topics=30,width=700,title=f"Hierarchical Clustering of Topics ({game_option2})"))
+            hier_most_topics2 = st.slider(f'Select the N most {feedback_option} frequent topics...     ', 1, app_data2_maxtopics, 30)
+            st.write(visualize_hierarchy(app_data2,orientation='left',custom_labels=True,top_n_topics=hier_most_topics2,width=700,title=f"Hierarchical Clustering of Topics ({game_option2})"))
 
-        st.markdown(f"<h4>Visualize grouped {feedback_option} reviews per topic theme in 2D Map</h4>",unsafe_allow_html=True)
+        st.markdown(f"<center><h4>Visualize grouped {feedback_option} reviews per topic theme in 2D Map</h4></center>",unsafe_allow_html=True)
         review_topics_col1,review_topics_col2 = st.columns(2)
         with review_topics_col1:
             st.write(visualize_documents(app_data1,app_data1['data']['review'].values, reduced_embeddings=app_data1['reduced_embeddings'], custom_labels=True, hide_annotations=True,width=700, title=f"Interactive 2D Map of {feedback_option} reviews ({game_option1})"))        
