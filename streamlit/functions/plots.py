@@ -24,7 +24,7 @@ def visualize_topics_over_time(
                                height: int = 450) -> go.Figure:
 
     colors = ["#E69F00", "#56B4E9", "#009E73", "#F0E442", "#D55E00", "#0072B2", "#CC79A7"]
-
+    colors = ['#E69F00', '#56B4E9', '#009E73', '#F0E442', '#D55E00', '#0072B2', '#CC79A7', '#F44336', '#E91E63', '#673AB7', '#FFEB3B', '#9C27B0', '#3F51B5', '#F06292', '#BA68C8', '#950CA1', '#EB144B', '#C62828', '#4CAF50', '#2196F3', '#03A9F4', '#00BCD4', '#009688', '#8BC34A', '#76FF9A', '#FF9800', '#FF5722', '#EE82EE', '#A1B2FF', '#64FFDA', '#1976D2', '#1DE9B6', '#00E676', '#00BDBD', '#90CAF9', '#66BBF5', '#3369D9']
     # Select topics based on top_n and topics args
     freq_df = topic_metadata['topics_over_time'].groupby('Topic').sum('Frequency').rename(columns={'Frequency':'Count'}).reset_index()
     freq_df = freq_df.loc[freq_df.Topic != -1, :]
@@ -249,7 +249,7 @@ def visualize_topics(
         words = list(summarised_topics_df['CustomName'])
     else:
         # words = [" | ".join([word[0] for word in topic_model.get_topic(topic)[:5]]) for topic in topic_list]
-        words = [" | ".join(word for word in topic[:5]) for topic in temp_data['summarised_topics']['Representation']]
+        words = [" | ".join(word for word in topic[:5]) for topic in topic_metadata['summarised_topics']['Representation']]
         
 
     # Embed c-TF-IDF into 2D
