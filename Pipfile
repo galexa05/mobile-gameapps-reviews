@@ -19,6 +19,8 @@ streamlit = "*"
 python-dotenv = "*"
 watchdog = "*"
 dill = "*"
+tqdm = "*"
+ipywidgets = "*"
 
 [dev-packages]
 
